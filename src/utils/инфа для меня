@@ -1,0 +1,17 @@
+💡 Как это связать вместе:
+Теперь, когда у тебя есть utils, ты можешь немного "причесать" свои основные файлы (extract.py, transform.py, load.py).
+Например, в начале extract.py ты можешь заменить хардкод настроек на:
+
+from src.utils.config import get_config, get_env_variable
+from src.utils.logger import get_logger
+
+logger = get_logger(__name__)
+API_TOKEN = get_env_variable("API_TOKEN")
+BATCH_SIZE = get_config("general", "batch_size", default=10000)
+
+А в transform.py перед записью данных добавить:
+
+from src.utils.validators import check_nulls, check_duplicates
+
+if not check_nulls(df, ["order_id", "amount"]):
+    raise ValueError("Валидация провалена: есть пропуски!")
