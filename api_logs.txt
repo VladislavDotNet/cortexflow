@@ -1,0 +1,19 @@
+﻿[QdrantLoader] ╨Я╨╛╨┤╨║╨╗╤О╤З╨╡╨╜╨╛ ╨║ qdrant:6333
+[EmbeddingGenerator] ╨Ч╨░╨│╤А╤Г╨╢╨░╤О ╨╝╨╛╨┤╨╡╨╗╤М all-MiniLM-L6-v2...
+[EmbeddingGenerator] ╨Ь╨╛╨┤╨╡╨╗╤М ╨╖╨░╨│╤А╤Г╨╢╨╡╨╜╨░
+INFO:     127.0.0.1:44448 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47270 - "GET /health HTTP/1.1" 200 OK
+docker : Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+строка:1 знак:1
++ docker logs cortexflow_api 2>&1 | Out-File api_logs.txt -Encoding UTF ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning: You ar...ster downloads.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]
+Loading weights: 100%|тЦИтЦИтЦИтЦИтЦИтЦИтЦИтЦИтЦИтЦИ| 103/103 [00:00<00:00, 2237.29it/s]
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)

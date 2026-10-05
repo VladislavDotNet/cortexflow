@@ -55,11 +55,39 @@ services:
         - QDRANT__SERVICE__HTTP_PORT=6333
         - QDRANT__SERVICE__GRPC_PORT=6334
       restart: unless-stopped
-      healthcheck:
-        test: [ "CMD", "curl", "-f", "http://localhost:6333/health" ]
-        interval: 30s
-        timeout: 10s
-        retries: 3
+#      healthcheck:
+ #       test: [ "CMD", "curl", "-f", "http://localhost:6333/health" ]
+  #      interval: 30s
+   #     timeout: 10s
+    #    retries: 3
+
+
+  # --- Сервис 4: FastAPI REST API ---
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: cortexflow_api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      POSTGRES_URL: postgresql://postgres:postgres@postgres:5432/cortexflow_raw
+      CLICKHOUSE_HOST: clickhouse
+      CLICKHOUSE_PORT: 9000
+      QDRANT_HOST: qdrant
+      QDRANT_PORT: 6333
+    #depends_on:
+  #    qdrant:
+   #     condition: service_healthy
+    #  postgres:
+     #   condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
 
 # --- БЛОК 2: ОПРЕДЕЛЕНИЕ ТОМОВ (VOLUMES) ---
 # Назначение: Объявление именованных томов для персистентного хранения данных.
