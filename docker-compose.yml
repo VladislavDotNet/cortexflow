@@ -89,6 +89,33 @@ services:
       retries: 3
       start_period: 60s
 
+
+#сервис 5 MinIO
+  minio:
+    image: chrislusf/seaweedfs:latest
+    container_name: cortexflow_minio
+    ports:
+      - "9000:8333"      # S3 API
+      - "9001:9333"      # Web UI
+    command: server -s3 -s3.port=8333 -master.port=9333
+    volumes:
+      - minio_data:/data
+    restart: unless-stopped
+
+
+
+  #Grafana
+  grafana:
+    image: grafana/grafana:latest
+    container_name: cortexflow_grafana
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+    restart: unless-stopped
+
 # --- БЛОК 2: ОПРЕДЕЛЕНИЕ ТОМОВ (VOLUMES) ---
 # Назначение: Объявление именованных томов для персистентного хранения данных.
 # Если не объявить здесь, Docker создаст их автоматически, но явное объявление - best practice.
@@ -100,4 +127,8 @@ volumes:
   clickhouse_logs:  # Том для логов ClickHouse
     driver: local
   qdrant_storage:
-      driver: local
+    driver: local
+  minio_data:
+    driver: local
+  grafana_data:
+    driver: local

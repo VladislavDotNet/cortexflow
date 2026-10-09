@@ -1,7 +1,24 @@
-.venv/
+# Python
 __pycache__/
 *.pyc
+*.pyo
+.venv/
+venv/
+.pytest_cache/
+
+# Environment
 .env
-data/raw/
-data/processed/
+*.env
+
+# Logs
+api_logs.txt
+*.log
+
+# IDE
 .idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
