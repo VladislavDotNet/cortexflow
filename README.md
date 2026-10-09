@@ -16,7 +16,7 @@ ETL-пайплайн для обработки телеметрии автоно
 docker-compose up -d
 ```
 
-Что внутри
+## Что внутри
 
     src/extract/ — читает из Postgres
     src/transform/ — чистит данные и генерирует эмбеддинги (MiniLM-L6-v2, 384 измерения)
@@ -26,12 +26,13 @@ docker-compose up -d
     prefect_flow.py — оркестрация пайплайна через Prefect
     .github/workflows/ — CI на GitHub Actions
 
-Стек
+## Стек
 Postgres → Pandas → ClickHouse + Qdrant → FastAPI → Grafana
+
 Оркестрация: Prefect
 CI: GitHub Actions + pytest
 Мониторинг: Grafana дашборд по ClickHouse
-Что не сделано
+## Что не сделано
 
     Healthcheck у Qdrant закомментирован — в официальном образе нет curl, чинить через sidecar-контейнер
     MinIO для data lake не добавлен — проблемы с доступом к Docker-образам из региона
